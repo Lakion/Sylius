@@ -270,6 +270,9 @@ class OrderItem implements OrderItemInterface
      */
     public function setTotal($total)
     {
+        if (!is_int($total)) {
+            throw new \InvalidArgumentException('Total must be an integer.');
+        }
         $this->total = $total;
 
         return $this;
