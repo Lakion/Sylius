@@ -57,7 +57,7 @@ class PercentageDiscountAction implements PromotionActionInterface
         }
 
         $adjustment = $this->createAdjustment($promotion);
-        $adjustmentAmount = intval(round($subject->getPromotionSubjectTotal() * $configuration['percentage']));
+        $adjustmentAmount = (int) round($subject->getPromotionSubjectTotal() * $configuration['percentage']);
         $adjustment->setAmount(- $adjustmentAmount);
         $adjustment->setDescription($promotion->getDescription());
 
