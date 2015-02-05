@@ -18,11 +18,11 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Per item rate calculator configuration form.
+ * Volume rate calculator configuration form.
  *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Antonio Peric <antonio@locastic.com>
  */
-class PerItemRateConfigurationType extends AbstractType
+class VolumeRateConfigurationType extends AbstractType
 {
     /**
      * Validation groups.
@@ -48,10 +48,17 @@ class PerItemRateConfigurationType extends AbstractType
     {
         $builder
             ->add('amount', 'sylius_money', array(
-                'label' => 'sylius.form.shipping_calculator.per_item_rate_configuration.amount',
+                'label' => 'sylius.form.shipping_calculator.volume_rate_configuration.amount',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'integer')),
+                )
+            ))
+            ->add('division', 'number', array(
+                'label' => 'sylius.form.shipping_calculator.volume_rate_configuration.division',
+                'constraints' => array(
+                    new NotBlank(),
+                    new Type(array('type' => 'numeric')),
                 )
             ))
         ;
@@ -75,6 +82,6 @@ class PerItemRateConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_shipping_calculator_per_item_rate_configuration';
+        return 'sylius_shipping_calculator_volume_rate_configuration';
     }
 }

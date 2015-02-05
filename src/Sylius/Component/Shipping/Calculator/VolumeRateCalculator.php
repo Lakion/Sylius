@@ -17,16 +17,16 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Per weight amount rate calculator.
  *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Antonio Peric <antonio@locastic.com>
  */
-class WeightRateCalculator extends Calculator
+class VolumeRateCalculator extends Calculator
 {
     /**
      * {@inheritdoc}
      */
     public function calculate(ShippingSubjectInterface $subject, array $configuration)
     {
-        return (int) round($configuration['amount'] * ($subject->getShippingWeight() / $configuration['division']));
+        return (int) round($configuration['amount'] * ($subject->getShippingVolume() / $configuration['division']));
     }
 
     /**
@@ -42,7 +42,7 @@ class WeightRateCalculator extends Calculator
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_shipping_calculator_weight_rate_configuration';
+        return 'sylius_shipping_calculator_volume_rate_configuration';
     }
 
     /**
