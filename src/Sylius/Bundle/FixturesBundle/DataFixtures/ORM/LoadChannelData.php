@@ -27,10 +27,10 @@ class LoadChannelsData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createChannel('WEB-UK', 'UK Webstore', array('en_GB'), array('GBP'), array('DHL', 'UPS Ground'), array('Dummy', 'Stripe')));
-        $manager->persist($this->createChannel('WEB-DE', 'Germany Webstore', array('de_DE'), array('EUR'), array('DHL', 'UPS Ground'), array('Dummy', 'Stripe')));
-        $manager->persist($this->createChannel('WEB-US', 'United States Webstore', array('en_US'), array('USD'), array('FedEx', 'FedEx World Shipping'), array('Dummy', 'Stripe')));
-        $manager->persist($this->createChannel('MOBILE', 'Mobile Store', array('en_GB', 'de_DE'), array('GBP', 'USD', 'EUR'), array('DHL', 'UPS Ground', 'FedEx'), array('Dummy', 'Stripe')));
+        $manager->persist($this->createChannel('WEB-UK', 'UK Webstore', 'http://uk-webstore.example.com', array('en_GB'), array('GBP'), array('DHL', 'UPS Ground'), array('Dummy', 'Stripe')));
+        $manager->persist($this->createChannel('WEB-DE', 'Germany Webstore', 'http://germany-webstore.example.com', array('de_DE'), array('EUR'), array('DHL', 'UPS Ground'), array('Dummy', 'Stripe')));
+        $manager->persist($this->createChannel('WEB-US', 'United States Webstore', 'http://us-webstore.example.com', array('en_US'), array('USD'), array('FedEx', 'FedEx World Shipping'), array('Dummy', 'Stripe')));
+        $manager->persist($this->createChannel('MOBILE', 'Mobile Store', 'http://mobile-store.example.com', array('en_GB', 'de_DE'), array('GBP', 'USD', 'EUR'), array('DHL', 'UPS Ground', 'FedEx'), array('Dummy', 'Stripe')));
 
         $manager->flush();
     }
@@ -52,11 +52,12 @@ class LoadChannelsData extends DataFixture
      *
      * @return ChannelInterface
      */
-    protected function createChannel($code, $name, array $locales = array(), array $currencies = array(), array $shippingMethods = array(), array $paymentMethods = array())
+    protected function createChannel($code, $name, $url, array $locales = array(), array $currencies = array(), array $shippingMethods = array(), array $paymentMethods = array())
     {
         $channel = $this->getChannelRepository()->createNew();
         $channel->setCode($code);
         $channel->setName($name);
+        $channel->setUrl($url);
         $channel->setColor($this->faker->randomElement(array('Red', 'Green', 'Blue', 'Orange', 'Pink')));
 
         $this->setReference('Sylius.Channel.'.$code, $channel);
