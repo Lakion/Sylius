@@ -55,8 +55,9 @@ class ProductRepository extends BaseProductRepository
     public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
-            ->select('product, variant')
+            ->select('product, variant, channels')
             ->leftJoin('product.variants', 'variant')
+            ->leftJoin('product.channels', 'channels')
         ;
 
         if (!empty($criteria['name'])) {
@@ -69,6 +70,12 @@ class ProductRepository extends BaseProductRepository
             $queryBuilder
                 ->andWhere('variant.sku = :sku')
                 ->setParameter('sku', $criteria['sku'])
+            ;
+        }
+        if (!empty($criteria['channels'])) {
+            $queryBuilder
+                ->andWhere('product.channels = :channels')
+                ->setParameter('channels', $criteria['channels'])
             ;
         }
 
