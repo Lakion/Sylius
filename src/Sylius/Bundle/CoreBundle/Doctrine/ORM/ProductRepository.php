@@ -58,6 +58,7 @@ class ProductRepository extends BaseProductRepository
             ->select('product, variant, channels')
             ->leftJoin('product.variants', 'variant')
             ->leftJoin('product.channels', 'channels')
+            ->leftJoin('product.taxons', 'categories')
         ;
 
         if (!empty($criteria['name'])) {
@@ -76,6 +77,12 @@ class ProductRepository extends BaseProductRepository
             $queryBuilder
                 ->andWhere('product.channels = :channels')
                 ->setParameter('channels', $criteria['channels'])
+            ;
+        }
+        if (!empty($criteria['categories'])) {
+            $queryBuilder
+                ->andWhere('product.taxons = :categories')
+                ->setParameter('categories', $criteria['categories'])
             ;
         }
 

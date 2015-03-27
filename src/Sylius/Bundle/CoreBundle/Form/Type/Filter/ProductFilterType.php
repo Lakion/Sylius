@@ -47,6 +47,12 @@ class ProductFilterType extends AbstractType
                 'multiple'    => true,
                 'empty_value' => 'All channels',
             ))
+            ->add('categories', 'entity', array(
+                'required'    => false,
+                'multiple'    => true,
+                'class'       => 'Sylius\Component\Core\Model\Taxon',
+                'empty_value' => 'All categories',
+            ))
         ;
     }
 
