@@ -33,11 +33,9 @@ class OrderType extends BaseOrderType
                     new NotBlank()
                 )
             ))
-            ->add('user', 'sylius_user_choice', array(
-                'constraints' => array(
-                    new NotBlank()
-                )
-            ))
+            ->add('user', 'sylius_user_choice')
+            ->add('email', 'email')
+            ->add('platformCode', 'text')
             ->add('currency', 'sylius_currency_code_choice', array(
                 'constraints' => array(
                     new NotBlank()
