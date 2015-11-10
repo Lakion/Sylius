@@ -24,7 +24,7 @@ sylius_api_order_create:
             form: sylius_api_order
 
 sylius_api_order_update:
-    path: /
+    path: /{id}
     methods: [PATCH]
     defaults:
         _controller: sylius.controller.order:updateAction
