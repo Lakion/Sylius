@@ -25,3 +25,5 @@ Sylius\Component\Core\Model\ProductVariant:
             type: float
         images:
             expose: true
+        pricingConfiguration:
+            expose: true
