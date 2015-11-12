@@ -1,6 +1,6 @@
 Sylius\Component\Core\Model\Taxon:
     exclusion_policy: ALL
-    properites:
+    properties:
         path:
             expose: true
             type: string
