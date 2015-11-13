@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -57,6 +58,9 @@ class ProductContext extends DefaultContext
 
             if (isset($data['sku'])) {
                 $product->setSku($data['sku']);
+            } else {
+                $slugify = new Slugify();
+                $product->setSku($slugify->slugify($data['name']));
             }
 
             if (isset($data['description'])) {
