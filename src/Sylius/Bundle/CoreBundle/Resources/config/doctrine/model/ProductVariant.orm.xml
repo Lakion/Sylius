@@ -23,7 +23,7 @@
             <index columns="sold" />
         </indexes>
 
-        <field name="sku" column="sku" type="string" nullable="true">
+        <field name="sku" column="sku" type="string" unique="true">
             <gedmo:versioned/>
         </field>
         <field name="onHold" column="on_hold" type="integer" />
